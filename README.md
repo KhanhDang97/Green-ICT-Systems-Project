@@ -350,3 +350,67 @@ Green ICT Systems Project
     </form>
 </body>
 </html>
+
+<!-- THIS IS CSS FILE: style.css -->
+*{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            width: 950px;
+            margin: auto;
+        }
+        #center{
+            float: right;
+            text-align: center;
+        }
+nav{
+    float: right;
+    width: 950px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.horizontal-nav {
+  background-image: url("http://landlab.wustl.edu/wp-content/themes/landlab/library/images/banner-background-green.jpg");
+  border-radius: 6px;  
+}
+.horizontal-nav ul {
+  background-color: forestgreen;
+  float: left;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #0e7079;
+}
+.horizontal-nav ul li {
+  float: left;
+  border-left: 1px solid #0e7079;
+  text-decoration: none;
+  list-style-type: none;
+}
+.horizontal-nav a{
+    text-decoration: none;
+}
+.horizontal-nav ul li:first-child {
+  border-left: 0 none;
+}
+.horizontal-nav ul li a {
+  display: block;
+  padding: 10px 20px;
+  color: #fff;
+  border-top: 1px solid rgba(255,255,255, 0.25);
+  border-left: 1px solid rgba(255,255,255, 0.25);
+}
+.horizontal-nav ul li:first-child a {
+  border-left: 0 none;
+}
+.horizontal-nav ul li a:hover {
+  background-color: darkslategrey;
+}
+.horizontal-nav ul li:first-child a {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.horizontal-nav ul li:last-child a {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
