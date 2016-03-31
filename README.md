@@ -165,3 +165,188 @@ Green ICT Systems Project
 </body>
 </html>
 
+<!-- THIS IS PAGE 3 -->
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="HelloWorld1.WebForm2" %>
+
+<!DOCTYPE html>
+<%@ Import Namespace="System.IO" %>
+<%@ Import Namespace="System.Net"%>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Weather energy consumption</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            width: 950px;
+            margin: auto;
+        }
+        fieldset{
+            width: 700px;
+            margin: auto;           
+       
+        }
+        legend{
+             padding: 10px;
+             font-size: 25px;
+             color: forestgreen;
+        }
+        #center{
+            float: right;
+            text-align: center;
+        }
+        h1{
+            text-align: center;
+        }
+        .px {
+            margin: 10px 0 5px 20px;
+            font-family: 'Century Gothic';   
+            text-decoration: underline;     
+        }
+        input{
+            width: 200px;
+            height: 25px;
+            font-size: 15px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            
+        }
+        #city, #EEC {
+            margin-left: 10px;
+            width: 150px;
+            height: 30px;
+            font-size: 20px;
+        }
+        .temperature {
+            width: 40px;
+            height: 25px;
+            font-size: 15px;
+        }
+        legend, label, input, table {
+            margin-left: 10px;
+        }
+        
+        #submit{
+            margin-top: 10px;
+            float: right;
+            background-color: lawngreen;
+            width: 70px;
+            height: 35px;
+            font-size: 15px;
+        }
+        #reset{
+            margin-top: 10px;
+            float: left;
+            background-color: lawngreen;
+            width: 50px;
+            height: 35px;
+            font-size: 15px;
+        }
+        
+        textarea{            
+            width: 500px;
+            height: 50px;
+            background-color: azure;
+            border: 1px solid #000000;
+            font-family: 'Century Gothic';
+            font-weight: bold;
+            font-size: 13px;
+        }
+    </style>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <header>            
+                <img src="http://www.asiagreenbuildings.com/wp-content/uploads/2015/08/building-energy-graphic-e1440411014202.jpg" alt="Energy consumption" style="width:600px; height:200px" />            
+            <p id ="center">                
+                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQDH8nAVGAzNB86BCmbWFJx_QyV42EojFWjbF5XE8S6UeR7VRVu" style="width:300px" /><br />
+                <img src="http://www.pgfbs.eu/site/images/green-projects.jpg" style="width:300px"/><br />
+                
+            </p>
+        </header>
+        <nav class="horizontal-nav full-width horizontalNav-notprocessed"> 
+  <ul>
+    <li><a href="HelloWorld.aspx">Home</a></li>
+    <li><a href="WebForm1.aspx">Contact</a></li>
+    <li><a href="WebForm2.aspx">Application</a></li>    
+  </ul>
+</nav>
+        <section id="main">
+                         
+            <h1>Weather Energy Consumption</h1>
+            
+            <fieldset>
+                
+                <legend style="font-size:20px;font-weight: bold">Calculation</legend>
+                <div class="px">First name:</div>
+                <input type="text" name="firstname" placeholder="Nina" /><br />
+                <div class="px">Last name:</div>
+                <input type="text" name="lastname" placeholder="Smith" /><br />
+                 
+                <div class="px">Current date:</div>
+                <input type="text" name="current_date" placeholder="dd.mm.yyyy"/><br />
+                <div class="px">Choose city:</div>
+                <select id="city">
+                        <option value="0">Lahti</option>
+                        <option value="1">Helsinki</option>
+                        <option value="2">Tempere</option>
+                        <option value="3">Jyvaskyla</option>
+                        <option value="4">Koupio</option>
+                        <option value="5">Oulu</option>
+                        <option value="6">Lappeenranta</option>
+                        <option value="7">Turku</option>
+                </select><br />
+                <div class="px">Outside temperature:</div> 
+                       
+                <input type="text" name="outside" id="outside" class="temperature" maxlength="3"/> oC<br /><br />
+                <div class="px">Inside temperature:</div>
+                <input type="text" name="inside" id="inside" class="temperature" maxlength="3"/> oC<br />    
+                <div class="px">House area:</div>
+                <input type="text" name="area" id="area"/> m3<br /><br /> 
+                          
+                <div class="px">Annual energy consumption:</div>
+                <select id="EEC">
+                        <option value="0">A (75)</option>
+                        <option value="1">B (160)</option>
+                        <option value="2">C (180)</option>
+                        <option value="3">D (210)</option>
+                        <option value="4">E (250)</option>
+                        <option value="5">F (295)</option>
+                        <option value="6">G (321)</option>
+                </select> kWh/m2/year<br />
+                <footer>
+                    <%
+                         string firstName = Convert.ToString(Request.Form["firstname"]);
+                         string lastName = Convert.ToString(Request.Form["lastname"]);
+                         double C_IN = Convert.ToDouble(Request.Form["inside"]);
+                         double C_OUT = Convert.ToDouble(Request.Form["outside"]);
+                         double E_YEAR = Convert.ToDouble(Request.Form["E_YEAR"]);
+                         double X = Convert.ToDouble(Request.Form["area"]);
+                         double Ed = (C_IN - C_OUT)*(((E_YEAR*X)/365)/(20-3.3));
+                         if (Request.Form["submit"] == "Submit")
+                         {
+                             Response.Write("<br /><em>Dear Mr/Ms " + firstName + " " + lastName + ",</em> " + "<br /><textarea> your estimated heating energy consumption: " + Ed + " kWh </textarea>");
+                         }                                        
+                     %>
+        </footer>
+                <input type="reset" value="Reset" name="reset" id="reset"  />
+            <input type="submit" value="Submit" name="submit" id="submit" />
+            </fieldset>
+            
+            
+            
+            
+        </section>
+        
+            
+        
+            
+       
+        
+    </div>
+    </form>
+</body>
+</html>
